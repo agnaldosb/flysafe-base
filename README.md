@@ -13,6 +13,7 @@ Use a tabela abaixo como referencia para copiar os arquivos desta pasta para den
 | `FlySafe ns3-38/src/network/model/node.h` | `ns-3.38/src/network/model/node.h` | Substituir |
 | `FlySafe ns3-38/src/network/model/node.cc` | `ns-3.38/src/network/model/node.cc` | Substituir |
 | `FlySafe ns3-38/contrib/ns3-ai/` | `ns-3.38/contrib/` | Copiar a pasta inteira, se quiser usar o `ns3-ai` |
+| `FlySafe ns3-38/flysafe_traces/` | `ns-3.38/` | Copiar a pasta inteira |
 
 Observacao: mantenha exatamente a mesma estrutura de subpastas. Nao coloque, por exemplo, `src/flysafe` dentro de outra pasta `src` adicional, nem crie `contrib/ns3-ai/ns3-ai` por engano.
 
@@ -59,6 +60,17 @@ O `ns3-ai v1.2.0` foi feito para o `ns-3.38` e permite integrar modelos em `PyTo
 O `FlySafe` continua funcionando normalmente sem o `ns3-ai`.
 
 Nesse caso, basta **nao copiar a pasta `contrib/ns3-ai/`** para o seu `ns-3.38`.
+
+## Como rodar os scripts de avaliação
+
+A pasta `flysafe_traces/` possui 16 scripts que calculam métricas para avaliação dos resultados das simulações. O script `0_run_all.sh` é um orquestrador responsável por rodar os outros 16. Então, basta utilizar o comando abaixo, dentro da pasta `flysafe_traces/`, para gerar todas as métricas de avaliação do FlySafe:
+
+
+```bash
+./0_run_all.sh
+```
+
+**Atenção**⚠️: `Os scripts 13 e 15 requerem muita memória RAM, um notebook comum de 16GB não consegue rodar. Existem versões anteriores desses scripts que rodam em um notebook comum, mas gasta um tempo de até 2 dias para executar todos os scripts (considerando 35 simulações de 40 nós).`
 
 ## Resumo rapido
 

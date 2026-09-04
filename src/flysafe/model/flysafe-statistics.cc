@@ -1137,9 +1137,10 @@ Statistics::EvaluateNeighborhood(Ipv4Address nodeIP, vector<ns3::MyTag::Neighbor
     for (int x = 0; x < (int)distanceError.size(); x++){
       sumDist += distanceError[x];
     }
-    double value = sumDist/(int)distanceError.size();
+    // Vinicius - MiM - Oct 29, 2025 - Commented because was calculating average two times
+    //double value = sumDist/(int)distanceError.size();
     strFinal << (sumDist/(int)distanceError.size());
-    strFinal << (std::ceil(value * 100.0) / 100.0);
+    //strFinal << (std::ceil(value * 100.0) / 100.0);
 
     auto minmax = std::minmax_element(distanceError.begin(), distanceError.end());
     strFinal << "\t"  << *minmax.first; // get MinError

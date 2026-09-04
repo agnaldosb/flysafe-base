@@ -31,7 +31,11 @@ GetTimeOfSimulationStart()
 
     if (ltm->tm_min < 10)
     	convert << "0";
-    convert << ltm->tm_min << endl<< endl;
+    convert << ltm->tm_min;
+
+    if (ltm->tm_sec < 10)
+    	convert << "0";
+    convert << ltm->tm_sec << endl<< endl;
 
 	return convert.str();
 }

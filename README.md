@@ -63,14 +63,40 @@ Nesse caso, basta **nao copiar a pasta `contrib/ns3-ai/`** para o seu `ns-3.38`.
 
 ## Como rodar os scripts de avaliação
 
-A pasta `flysafe_traces/` possui 16 scripts que calculam métricas para avaliação dos resultados das simulações. O script `0_run_all.sh` é um orquestrador responsável por rodar os outros 16. Então, basta utilizar o comando abaixo, dentro da pasta `flysafe_traces/`, para gerar todas as métricas de avaliação do FlySafe:
+A pasta `flysafe_traces/scripts/` contem os scripts que calculam as metricas de avaliacao
+do FlySafe, uma por arquivo. O `0_run_all.py` roda todos na ordem certa e escreve as
+tabelas em LaTeX ao final.
 
+Rode **de dentro da pasta `scripts/`**:
 
 ```bash
-./0_run_all.sh
+cd flysafe_traces/scripts
+./0_run_all.py            # os dois cenarios (all e o padrao)
+./0_run_all.py bl         # so BASELINE
+./0_run_all.py ba         # so BASEATTK
 ```
 
-**Atenção**⚠️: `Os scripts 13 e 15 requerem muita memória RAM, um notebook comum de 16GB não consegue rodar. Existem versões anteriores desses scripts que rodam em um notebook comum, mas gasta um tempo de até 2 dias para executar todos os scripts (considerando 35 simulações de 40 nós).`
+Cada metrica tambem roda sozinha, com o mesmo parametro:
+
+```bash
+./3_localization_error.py ba
+./8_tables.py                 # so regerar as tabelas .tex
+```
+
+As pastas dos cenarios ficam ao lado de `scripts/`:
+
+```
+flysafe_traces/
+├── scripts/
+├── BASELINE/     simulacoes sem ataque
+└── BASEATTK/     simulacoes com ataque, sem defesa
+```
+
+Os resultados vao para `<cenario>/flysafe_global_traces/` e as tabelas para
+`flysafe_traces/tables/`.
+
+O `flysafe_traces/scripts/README.md` explica cada metrica, e traz as instrucoes para voce
+**adicionar o seu proprio cenario** de solucao e as **suas proprias metricas** ao pipeline.
 
 ## Resumo rapido
 
@@ -79,3 +105,4 @@ A pasta `flysafe_traces/` possui 16 scripts que calculam métricas para avaliaç
 3. Rode `./ns3 configure --enable-tests` e depois `./ns3 build`.
 4. Use `bash run_flysafe.sh` para validar a instalacao.
 5. Se nao for usar o `ns3-ai`, pode deixar a pasta `contrib/ns3-ai/` de fora.
+6. Para avaliar os resultados, rode `./0_run_all.py` de dentro de `flysafe_traces/scripts/`.
